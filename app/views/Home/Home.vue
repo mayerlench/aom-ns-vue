@@ -36,28 +36,31 @@
                 textWrap="true" 
                 text="לעילוי נשמת רוחמה חיה פרומא בת דוב פנחס" 
             />
-           <Button @tap="navigateTo(Alarm)" text="Set Alarm" class="alarmBtn -rounded-sm"></Button>
+           <Button @tap="$navigateTo(SetAlarm)" text="Set Alarm" class="alarmBtn -rounded-sm"></Button>
         </StackLayout>
         </Page>
 </template>
 
 <script lang="ts">
-    import * as utils from "@/shared/utils";
-    import SelectedPageService from "@/shared/selected-page-service";
+import * as utils from "@/shared/utils";
+import SelectedPageService from "@/shared/selected-page-service";
+import SetAlarm from "@/views/SetAlarm";
 
-    export default {
-        mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("Browse");
-        },
-        computed: {
-         
-        },
-        methods: {
-            onDrawerButtonTap() {
-                utils.showDrawer();
-            }
-        }
+export default {
+  data() {
+    return {
+      SetAlarm
     };
+  },
+  mounted() {
+    SelectedPageService.getInstance().updateSelectedPage("Home");
+  },
+  methods: {
+    onDrawerButtonTap() {
+      utils.showDrawer();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -81,11 +84,11 @@
 }
 
 .alarmBtn {
-    color:white;
-    margin-top: 50px;
-    background-color: rgb(58, 57, 57);
-    width: 350px;
-    border-radius: 20;
+  color: white;
+  margin-top: 50px;
+  background-color: rgb(58, 57, 57);
+  width: 350px;
+  border-radius: 20;
 }
 
 // Custom styles

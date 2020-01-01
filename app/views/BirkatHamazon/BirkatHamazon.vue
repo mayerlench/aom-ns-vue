@@ -1,23 +1,14 @@
 <template>
   <Page class="page">
     <ActionBar class="action-bar">
-      <!-- 
-            Use the NavigationButton as a side-drawer button in Android
-            because ActionItems are shown on the right side of the ActionBar
-      -->
       <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
-      <!-- 
-            Use the ActionItem for IOS with position set to left. Using the
-            NavigationButton as a side-drawer button in iOS is not possible,
-            because its function is to always navigate back in the application.
-      -->
       <ActionItem
         icon="res://menu"
         android:visibility="collapsed"
         @tap="onDrawerButtonTap"
         ios.position="left"
       ></ActionItem>
-      <Label class="action-bar-title" text="Asher Yatzar"></Label>
+      <Label class="action-bar-title" text="Birkat Hamazon"></Label>
     </ActionBar>
     <ScrollView>
       <FlexboxLayout flexWrap="wrap" alignContent="flex-start" class="container">
@@ -32,17 +23,6 @@
             <Span :text="text.substring(getFirstWord(text).length) + '\n\n'" class="t-20" />
           </FormattedString>
         </Label>
-        <Label
-          textWrap="true"
-          class="formattedText"
-          v-for="(text, i) in text.english"
-          v-bind:key="i"
-        >
-          <FormattedString>
-            <Span :text="getFirstWord(text)" class="fas t-18" />
-            <Span :text="text.substring(getFirstWord(text).length) + '\n\n'" class="t-20" />
-          </FormattedString>
-        </Label>
       </FlexboxLayout>
     </ScrollView>
   </Page>
@@ -51,7 +31,7 @@
 <script lang="ts">
 import * as utils from "@/shared/utils";
 import SelectedPageService from "@/shared/selected-page-service";
-import prayerText from "@/assets/prayers/asherYatzar.json";
+import prayerText from "@/assets/prayers/birkatHamazon.json";
 
 export default {
   data() {
@@ -60,7 +40,7 @@ export default {
     };
   },
   mounted() {
-    SelectedPageService.getInstance().updateSelectedPage("AsherYatzar");
+    SelectedPageService.getInstance().updateSelectedPage("BirkatHamazon");
   },
   methods: {
     getFirstWord: text => text.split(" ")[0],

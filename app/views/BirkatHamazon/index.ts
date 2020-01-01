@@ -1,1 +1,1 @@
-export { default } from './AsherYatzar'
+export { default } from './BirkatHamazon'

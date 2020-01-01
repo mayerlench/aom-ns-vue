@@ -39,6 +39,7 @@ import BirkatHamazon from "@/views/BirkatHamazon";
 import BirkatHamazonShort from "@/views/BirkatHamazonShort";
 import * as utils from "@/shared/utils";
 import SelectedPageService from "@/shared/selected-page-service";
+import SetAlarm from "@/views/SetAlarm";
 
 export default {
   mounted() {
@@ -52,6 +53,7 @@ export default {
       AsherYatzar,
       BirkatHamazon,
       BirkatHamazonShort,
+      SetAlarm,
       selectedPage: ""
     };
   },
@@ -59,7 +61,8 @@ export default {
     Home,
     AsherYatzar,
     BirkatHamazon,
-    BirkatHamazonShort
+    BirkatHamazonShort,
+    SetAlarm
   },
   methods: {
     onNavigationItemTap(component) {

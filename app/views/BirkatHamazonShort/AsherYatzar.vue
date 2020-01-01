@@ -1,57 +1,73 @@
 <template>
-    <Page class="page">
-        <ActionBar class="action-bar">
-            <!-- 
-            Use the NavigationButton as a side-drawer button in Android
-            because ActionItems are shown on the right side of the ActionBar
-            -->
-            <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
-            <!-- 
-            Use the ActionItem for IOS with position set to left. Using the
-            NavigationButton as a side-drawer button in iOS is not possible,
-            because its function is to always navigate back in the application.
-            -->
-            <ActionItem icon="res://menu" 
-                android:visibility="collapsed" 
-                @tap="onDrawerButtonTap"
-                ios.position="left">
-            </ActionItem>
-            <Label class="action-bar-title" text="Browse"></Label>
-        </ActionBar>
-
-        <GridLayout class="page__content">
-            <Label class="page__content-icon far" text.decode="&#xf1ea;"></Label>
-            <Label class="page__content-placeholder" :text="message"></Label>
-        </GridLayout>
-
-    </Page>
+  <Page class="page">
+    <ActionBar class="action-bar">
+      <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
+      <ActionItem
+        icon="res://menu"
+        android:visibility="collapsed"
+        @tap="onDrawerButtonTap"
+        ios.position="left"
+      ></ActionItem>
+      <Label class="action-bar-title" text="Birkat Hamazon (Short)"></Label>
+    </ActionBar>
+    <ScrollView>
+      <FlexboxLayout flexWrap="wrap" alignContent="flex-start" class="container">
+        <Label
+          textWrap="true"
+          class="formattedText"
+          v-for="(text, i) in text.hebrewShort"
+          v-bind:key="i"
+        >
+          <FormattedString>
+            <Span :text="getFirstWord(text)" class="fas t-20" />
+            <Span :text="text.substring(getFirstWord(text).length) + '\n\n'" class="t-20" />
+          </FormattedString>
+        </Label>
+      </FlexboxLayout>
+    </ScrollView>
+  </Page>
 </template>
 
 <script lang="ts">
-    import * as utils from "@/shared/utils";
-    import SelectedPageService from "@/shared/selected-page-service";
+import * as utils from "@/shared/utils";
+import SelectedPageService from "@/shared/selected-page-service";
+import prayerText from "@/assets/prayers/birkatHamazon.json";
 
-    export default {
-        mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("Browse");
-        },
-        computed: {
-            message() {
-                return "<!-- Page content goes here -->";
-            }
-        },
-        methods: {
-            onDrawerButtonTap() {
-                utils.showDrawer();
-            }
-        }
+export default {
+  data() {
+    return {
+      text: prayerText
     };
+  },
+  mounted() {
+    SelectedPageService.getInstance().updateSelectedPage("BirkatHamazonShort");
+  },
+  methods: {
+    getFirstWord: text => text.split(" ")[0],
+
+    onDrawerButtonTap() {
+      utils.showDrawer();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-    // Start custom common variables
-    @import '~@nativescript/theme/scss/variables/blue';
-    // End custom common variables
-
-    // Custom styles
+// Start custom common variables
+@import "~@nativescript/theme/scss/variables/blue";
+// End custom common variables
+.container {
+  background-color: #d5d5d5;
+  padding: 15;
+}
+.content {
+  padding: 15;
+}
+.itemHeaderText {
+  font-family: Roboto;
+  height: auto;
+  color: #333;
+  font-size: 23;
+  font-weight: 300;
+}
 </style>
