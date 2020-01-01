@@ -13,26 +13,19 @@
                         <Label col="1" text="Home" class="p-r-10"></Label>
                     </GridLayout>
 
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Browse' ? ' -selected': '')" @tap="onNavigationItemTap(Browse)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'AsherYatzar' ? ' -selected': '')" @tap="onNavigationItemTap(AsherYatzar)">
                         <Label col="0" text.decode="&#xf1ea;" class="nt-icon far"></Label>
-                        <Label col="1" text="Browse" class="p-r-10"></Label>
+                        <Label col="1" text="Asher Yatzar" class="p-r-10"></Label>
                     </GridLayout>
 
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Search' ? ' -selected': '')" @tap="onNavigationItemTap(Search)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'BirkatHamazon' ? ' -selected': '')" @tap="onNavigationItemTap(BirkatHamazon)">
                         <Label col="0" text.decode="&#xf002;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Search" class="p-r-10"></Label>
+                        <Label col="1" text="Birkat Hamazon" class="p-r-10"></Label>
                     </GridLayout>
 
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Featured' ? ' -selected': '')" @tap="onNavigationItemTap(Featured)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'BirkatHamazonShort' ? ' -selected': '')" @tap="onNavigationItemTap(BirkatHamazonShort)">
                         <Label col="0" text.decode="&#xf005;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Featured" class="p-r-10"></Label>
-                    </GridLayout>
-        
-                    <StackLayout class="hr"></StackLayout>
-
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Settings' ? ' -selected': '')" @tap="onNavigationItemTap(Settings)">
-                        <Label col="0" text.decode="&#xf013;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Settings" class="p-r-10"></Label>
+                        <Label col="1" text="Birkat Hamazon (Short)" class="p-r-10"></Label>
                     </GridLayout>
                 </StackLayout>
             </ScrollView>
@@ -40,51 +33,49 @@
 </template>
 
 <script lang="ts">
-    import Home from "./Home";
-    import Browse from "./Browse";
-    import Featured from "./Featured";
-    import Search from "./Search";
-    import Settings from "./Settings";
-    import * as utils from "@/shared/utils";
-    import SelectedPageService from "@/shared/selected-page-service";    
-    
-    export default {
-        mounted() {
-            SelectedPageService.getInstance().selectedPage$
-                .subscribe((selectedPage) => this.selectedPage = selectedPage);
-        },
-        data () {
-            return {
-                Home: Home,
-                Browse: Browse,
-                Featured: Featured,
-                Search: Search,
-                Settings: Settings,
-                selectedPage: ""
-            };
-        },
-        components: {
-            Home,
-            Browse,
-            Featured,
-            Search,
-            Settings
-        },
-        methods: {
-            onNavigationItemTap(component) {
-                this.$navigateTo(component, {
-                    clearHistory: true
-                });
-                utils.closeDrawer();
-            }
-        }
+import Home from "@/views/Home";
+import AsherYatzar from "@/views/AsherYatzar";
+import BirkatHamazon from "@/views/BirkatHamazon";
+import BirkatHamazonShort from "@/views/BirkatHamazonShort";
+import * as utils from "@/shared/utils";
+import SelectedPageService from "@/shared/selected-page-service";
+
+export default {
+  mounted() {
+    SelectedPageService.getInstance().selectedPage$.subscribe(
+      selectedPage => (this.selectedPage = selectedPage)
+    );
+  },
+  data() {
+    return {
+      Home,
+      AsherYatzar,
+      BirkatHamazon,
+      BirkatHamazonShort,
+      selectedPage: ""
     };
+  },
+  components: {
+    Home,
+    AsherYatzar,
+    BirkatHamazon,
+    BirkatHamazonShort
+  },
+  methods: {
+    onNavigationItemTap(component) {
+      this.$navigateTo(component, {
+        clearHistory: true
+      });
+      utils.closeDrawer();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-    // Start custom common variables
-    @import '~@nativescript/theme/scss/variables/blue';
-    // End custom common variables
+// Start custom common variables
+@import "~@nativescript/theme/scss/variables/blue";
+// End custom common variables
 
-    // Custom styles
+// Custom styles
 </style>

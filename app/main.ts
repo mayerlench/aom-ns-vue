@@ -1,6 +1,6 @@
 import Vue from "nativescript-vue";
 import App from "./components/App";
-import Home from "./components/Home";
+import Home from "./views/Home";
 import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 import store from './store'
@@ -12,6 +12,7 @@ if (TNS_ENV !== 'production')
 Vue.use(RadSideDrawer);
 
 Vue.config.silent = (TNS_ENV === 'production');
+Vue.registerElement('ShadowedLabel', () => require('nativescript-shadowed-label').ShadowedLabel);
 
 new Vue({
   store,
