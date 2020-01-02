@@ -5,7 +5,7 @@
   "author": "Mayer Lench <mayerlench1314@gmail.com>",
   "license": "MIT",
   "nativescript": {
-    "id": "com.mayerlench.aom",
+    "id": "org.mlench.aom",
     "templateVersion": "v2",
     "tns-android": {
       "version": "6.0.0"
