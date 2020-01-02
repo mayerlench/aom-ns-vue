@@ -16,7 +16,7 @@
         </GridLayout>
         <StackLayout class="bg-image">
             <shadowed-label 
-                class="text-white"
+                class="text-white headerTextHebrew"
                 textShadow="2 2 3 rgb(0, 0, 100)"
                 fontSize="55" 
                 textWrap="true" 
@@ -67,6 +67,10 @@ export default {
 // Start custom common variables
 @import "~@nativescript/theme/scss/variables/blue";
 // End custom common variables
+.headerTextHebrew {
+    margin-top: 30;
+}
+
 .bg-image {
   background-size: cover;
   background-image: url("~/assets/images/bg.png");
