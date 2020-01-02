@@ -16,16 +16,16 @@
         </GridLayout>
         <StackLayout class="bg-image">
             <shadowed-label 
-                class="text-white headerTextHebrew"
+                class="text-white headerText"
                 textShadow="2 2 3 rgb(0, 0, 100)"
-                fontSize="55" 
+                fontSize="50" 
                 textWrap="true" 
                 text="אין עוד מלבדו" 
             />
             <shadowed-label 
-                class="text-white" 
+                class="text-white headerText" 
                 textShadow="2 2 3 rgb(0, 0, 100)"
-                fontSize="55"
+                fontSize="50"
                 textWrap="true" 
                 text="THERE IS NONE BUT HIM" 
             /> 
@@ -67,8 +67,8 @@ export default {
 // Start custom common variables
 @import "~@nativescript/theme/scss/variables/blue";
 // End custom common variables
-.headerTextHebrew {
-    margin-top: 30;
+.headerText {
+    margin-top: 40;
 }
 
 .bg-image {
@@ -84,7 +84,7 @@ export default {
 }
 
 .leiluNishmas {
-  margin-top: 25px;
+  margin-top: 25%;
 }
 
 .alarmBtn {
