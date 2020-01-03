@@ -20,13 +20,55 @@
         <TimePicker v-model="selectedTime" />
 
         <GridLayout columns="*,*,*,*,*,*,*" class="daysContainer">
-          <Label text="S" col="0" @tap="onDayTap(1)" :class="{activeDay :days.includes(1)}" />
-          <Label text="M" col="1" @tap="onDayTap(2)" :class="{activeDay :days.includes(2)}" />
-          <Label text="T" col="2" @tap="onDayTap(3)" :class="{activeDay :days.includes(3)}" />
-          <Label text="W" col="3" @tap="onDayTap(4)" :class="{activeDay :days.includes(4)}" />
-          <Label text="T" col="4" @tap="onDayTap(5)" :class="{activeDay :days.includes(5)}" />
-          <Label text="F" col="5" @tap="onDayTap(6)" :class="{activeDay :days.includes(6)}" />
-          <Label text="S" col="6" @tap="onDayTap(7)" :class="{activeDay :days.includes(7)}" />
+          <Label
+            text="S"
+            col="0"
+            @tap="onDayTap(1)"
+            :class="{activeDay :days.includes(1)}"
+            class="day"
+          />
+          <Label
+            text="M"
+            col="1"
+            @tap="onDayTap(2)"
+            :class="{activeDay :days.includes(2)}"
+            class="day"
+          />
+          <Label
+            text="T"
+            col="2"
+            @tap="onDayTap(3)"
+            :class="{activeDay :days.includes(3)}"
+            class="day"
+          />
+          <Label
+            text="W"
+            col="3"
+            @tap="onDayTap(4)"
+            :class="{activeDay :days.includes(4)}"
+            class="day"
+          />
+          <Label
+            text="T"
+            col="4"
+            @tap="onDayTap(5)"
+            :class="{activeDay :days.includes(5)}"
+            class="day"
+          />
+          <Label
+            text="F"
+            col="5"
+            @tap="onDayTap(6)"
+            :class="{activeDay :days.includes(6)}"
+            class="day"
+          />
+          <Label
+            text="S"
+            col="6"
+            @tap="onDayTap(7)"
+            :class="{activeDay :days.includes(7)}"
+            class="day"
+          />
         </GridLayout>
         <Button text="Set Alarm" @tap="onButtonTap" class="setAlarmBtn -rounded -primary" />
       </StackLayout>
@@ -60,7 +102,7 @@ export default {
     },
     onButtonTap() {
       if (!this.message) return alert("Please enter an alarm message");
-      
+
       this.createAlarm();
       this.$navigateBack();
     },
@@ -102,8 +144,14 @@ export default {
   text-align: center;
 }
 .activeDay {
-  background-color: rgb(89, 89, 255);
-  color: white;
+  background-color: #c5f924;
+  color: black;
+}
+.day {
+  height: 100px;
+  width: 175px;
+  margin: 2;
+  font-size: 15;
 }
 .setAlarmBtn {
   margin-top: 50;
