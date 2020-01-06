@@ -17,16 +17,58 @@
           class="alarmHelpMsg"
         />
         <TextField v-model="message" hint="Alarm Message" class="alarmMessageInput" />
-       <TimePicker v-model="selectedTime" />
+        <TimePicker v-model="selectedTime" />
 
         <GridLayout columns="*,*,*,*,*,*,*" class="daysContainer">
-          <Label text="S" col="0" @tap="onDayTap(1)" :class="{activeDay :days.includes(1)}" />
-          <Label text="M" col="1" @tap="onDayTap(2)" :class="{activeDay :days.includes(2)}" />
-          <Label text="T" col="2" @tap="onDayTap(3)" :class="{activeDay :days.includes(3)}" />
-          <Label text="W" col="3" @tap="onDayTap(4)" :class="{activeDay :days.includes(4)}" />
-          <Label text="T" col="4" @tap="onDayTap(5)" :class="{activeDay :days.includes(5)}" />
-          <Label text="F" col="5" @tap="onDayTap(6)" :class="{activeDay :days.includes(6)}" />
-          <Label text="S" col="6" @tap="onDayTap(7)" :class="{activeDay :days.includes(7)}" />
+          <Label
+            text="S"
+            col="0"
+            @tap="onDayTap(1)"
+            :class="{activeDay :days.includes(1)}"
+            class="day"
+          />
+          <Label
+            text="M"
+            col="1"
+            @tap="onDayTap(2)"
+            :class="{activeDay :days.includes(2)}"
+            class="day"
+          />
+          <Label
+            text="T"
+            col="2"
+            @tap="onDayTap(3)"
+            :class="{activeDay :days.includes(3)}"
+            class="day"
+          />
+          <Label
+            text="W"
+            col="3"
+            @tap="onDayTap(4)"
+            :class="{activeDay :days.includes(4)}"
+            class="day"
+          />
+          <Label
+            text="T"
+            col="4"
+            @tap="onDayTap(5)"
+            :class="{activeDay :days.includes(5)}"
+            class="day"
+          />
+          <Label
+            text="F"
+            col="5"
+            @tap="onDayTap(6)"
+            :class="{activeDay :days.includes(6)}"
+            class="day"
+          />
+          <Label
+            text="S"
+            col="6"
+            @tap="onDayTap(7)"
+            :class="{activeDay :days.includes(7)}"
+            class="day"
+          />
         </GridLayout>
         <Button text="Set Alarm" @tap="onButtonTap" class="setAlarmBtn -rounded -primary" />
       </StackLayout>
@@ -42,9 +84,9 @@ import { android as androidApp } from "tns-core-modules/application";
 export default {
   data() {
     return {
-      message: "HELLLLLLLL",
+      message: "",
       selectedTime: new Date(),
-      days: [new Date().getDay() + 1]
+      days: []
     };
   },
   mounted() {
@@ -60,9 +102,9 @@ export default {
     },
     onButtonTap() {
       if (!this.message) return alert("Please enter an alarm message");
-      if (this.days.length == 0) return alert("Choose alarm days");
+
       this.createAlarm();
-      this.$navigateBack()
+      this.$navigateBack();
     },
     createAlarm() {
       const Calendar = android.icu.util.Calendar;
@@ -70,16 +112,18 @@ export default {
       const AlarmClock = android.provider.AlarmClock;
       const ArrayList = java.util.ArrayList;
       const context = androidApp.context;
-        var days = new ArrayList<java.lang.Integer>();
-        this.days.map(m => days.add(new java.lang.Integer(m)));
-        var i = new Intent(AlarmClock.ACTION_SET_ALARM);
-        i.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-        i.putExtra(AlarmClock.EXTRA_HOUR, this.selectedTime.getHours());
-        i.putExtra(AlarmClock.EXTRA_MINUTES, this.selectedTime.getMinutes());
-        i.putExtra(AlarmClock.EXTRA_MESSAGE, this.message);
-        i.putExtra(AlarmClock.EXTRA_DAYS, days);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+      var days = new ArrayList<java.lang.Integer>();
+      this.days.map(m => days.add(new java.lang.Integer(m)));
+
+      var i = new Intent(AlarmClock.ACTION_SET_ALARM);
+      i.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+      i.putExtra(AlarmClock.EXTRA_HOUR, this.selectedTime.getHours());
+      i.putExtra(AlarmClock.EXTRA_MINUTES, this.selectedTime.getMinutes());
+      i.putExtra(AlarmClock.EXTRA_MESSAGE, this.message);
+      i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+      if (!days.isEmpty()) i.putExtra(AlarmClock.EXTRA_DAYS, days);
+      context.startActivity(i);
     }
   }
 };
@@ -100,8 +144,14 @@ export default {
   text-align: center;
 }
 .activeDay {
-  background-color: rgb(89, 89, 255);
-  color: white;
+  background-color: #c5f924;
+  color: black;
+}
+.day {
+  height: 100px;
+  width: 175px;
+  margin: 2;
+  font-size: 15;
 }
 .setAlarmBtn {
   margin-top: 50;
