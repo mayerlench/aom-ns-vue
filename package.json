@@ -17,17 +17,21 @@
   "dependencies": {
     "@nativescript/theme": "^2.2.1",
     "@vue/devtools": "^5.3.3",
+    "gematriya": "^2.0.0",
+    "nativescript-accordion": "^6.0.0-beta.2",
     "nativescript-shadowed-label": "^1.0.0",
     "nativescript-socketio": "^3.3.1",
     "nativescript-toasty": "^3.0.0-alpha.2",
     "nativescript-ui-sidedrawer": "^8.0.0",
     "nativescript-vue": "^2.4.0",
     "nativescript-vue-devtools": "^1.2.0",
+    "ramda": "^0.26.1",
     "tns-core-modules": "^6.3.2",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@types/ramda": "^0.26.39",
     "@babel/preset-env": "^7.0.0",
     "@types/node": "^13.1.2",
     "babel-loader": "^8.0.2",

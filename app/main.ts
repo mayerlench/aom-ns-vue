@@ -5,11 +5,13 @@ import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 import store from './store'
 import VueDevtools from 'nativescript-vue-devtools'
+import Pager from 'nativescript-accordion/vue'
 
 if (TNS_ENV !== 'production')
   Vue.use(VueDevtools)
 
-Vue.use(RadSideDrawer);
+Vue.use(RadSideDrawer)
+Vue.use(Pager)
 
 Vue.config.silent = (TNS_ENV === 'production');
 Vue.registerElement('ShadowedLabel', () => require('nativescript-shadowed-label').ShadowedLabel);

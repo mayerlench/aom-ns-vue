@@ -25,6 +25,10 @@
                         <!-- <Label col="0" text.decode="&#xf005;" class="nt-icon fas"></Label> -->
                         <Label col="1" text="Birkat Hamazon (Short)" class="p-r-10"></Label>
                     </GridLayout>
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'TehilimList' ? ' -selected': '')" @tap="onNavigationItemTap(TehilimList)">
+                        <!-- <Label col="0" text.decode="&#xf005;" class="nt-icon fas"></Label> -->
+                        <Label col="1" text="Tehilim" class="p-r-10"></Label>
+                    </GridLayout>
                 </StackLayout>
             </ScrollView>
         </GridLayout>
@@ -37,7 +41,7 @@ import BirkatHamazon from "@/views/BirkatHamazon";
 import BirkatHamazonShort from "@/views/BirkatHamazonShort";
 import * as utils from "@/shared/utils";
 import SelectedPageService from "@/shared/selected-page-service";
-import SetAlarm from "@/views/SetAlarm";
+import TehilimList from "@/views/TehilimList";
 
 export default {
   mounted() {
@@ -51,8 +55,8 @@ export default {
       AsherYatzar,
       BirkatHamazon,
       BirkatHamazonShort,
-      SetAlarm,
-      selectedPage: ""
+      TehilimList,
+      selectedPage: "SetAlarm"
     };
   },
   components: {
@@ -60,7 +64,7 @@ export default {
     AsherYatzar,
     BirkatHamazon,
     BirkatHamazonShort,
-    SetAlarm
+    TehilimList
   },
   methods: {
     onNavigationItemTap(component) {
