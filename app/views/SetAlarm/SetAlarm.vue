@@ -1,12 +1,7 @@
 <template>
   <Page class="page">
     <ActionBar class="action-bar">
-      <NavigationButton
-        ios:visibility="collapsed"
-        android.systemIcon="ic_menu_back"
-        class="fas"
-        @tap="$navigateBack"
-      ></NavigationButton>
+      <NavigationButton android.systemIcon="ic_menu_back" class="fas" @tap="$navigateBack"></NavigationButton>
       <Label class="action-bar-title" text="New Alarm"></Label>
     </ActionBar>
     <ScrollView>
@@ -21,52 +16,12 @@
 
         <GridLayout columns="*,*,*,*,*,*,*" class="daysContainer">
           <Label
-            text="S"
-            col="0"
-            @tap="onDayTap(1)"
-            :class="{activeDay :days.includes(1)}"
-            class="day"
-          />
-          <Label
-            text="M"
-            col="1"
-            @tap="onDayTap(2)"
-            :class="{activeDay :days.includes(2)}"
-            class="day"
-          />
-          <Label
-            text="T"
-            col="2"
-            @tap="onDayTap(3)"
-            :class="{activeDay :days.includes(3)}"
-            class="day"
-          />
-          <Label
-            text="W"
-            col="3"
-            @tap="onDayTap(4)"
-            :class="{activeDay :days.includes(4)}"
-            class="day"
-          />
-          <Label
-            text="T"
-            col="4"
-            @tap="onDayTap(5)"
-            :class="{activeDay :days.includes(5)}"
-            class="day"
-          />
-          <Label
-            text="F"
-            col="5"
-            @tap="onDayTap(6)"
-            :class="{activeDay :days.includes(6)}"
-            class="day"
-          />
-          <Label
-            text="S"
-            col="6"
-            @tap="onDayTap(7)"
-            :class="{activeDay :days.includes(7)}"
+            v-for="d in daysOptions"
+            :key="d.value"
+            :text="d.text"
+            :col="d.value"
+            @tap="onDayTap(d.value)"
+            :class="{activeDay :days.includes(d.value)}"
             class="day"
           />
         </GridLayout>
@@ -79,14 +34,27 @@
 <script lang="ts">
 import * as utils from "@/shared/utils";
 import SelectedPageService from "@/shared/selected-page-service";
-import { android as androidApp } from "tns-core-modules/application";
+import {
+  android as androidApp,
+  iOSApplication
+} from "tns-core-modules/application";
+import { isIOS } from "tns-core-modules/platform";
 
 export default {
   data() {
     return {
       message: "",
       selectedTime: new Date(),
-      days: []
+      daysOptions: [
+        { text: "S", value: 0 },
+        { text: "M", value: 1 },
+        { text: "T", value: 2 },
+        { text: "W", value: 3 },
+        { text: "T", value: 4 },
+        { text: "F", value: 5 },
+        { text: "S", value: 6 }
+      ],
+      days: [],
     };
   },
   mounted() {
@@ -107,6 +75,51 @@ export default {
       this.$navigateBack();
     },
     createAlarm() {
+      if (isIOS) {
+        const eventStore = new EKEventStore();
+        
+        const self = this;
+        eventStore.requestAccessToEntityTypeCompletion(
+          EKEntityType.Event,
+          (result, error) => {
+            if (result == true) {
+              const event = new EKEvent();
+              const alarm = new EKAlarm();
+              const recurrenceRule = new EKRecurrenceRule({
+                daysOfTheMonth: null,
+                monthsOfTheYear: null,
+                weeksOfTheYear: null,
+                daysOfTheYear: null,
+                setPositions: null,
+                end: null,
+                recurrenceWithFrequency: null,
+                interval: null,
+                daysOfTheWeek: NSArray.arrayWithArray(self.days)
+              });
+
+              alarm.setValueForKey(self.message, "title");
+              alarm.setValueForKey(0, "type");
+              alarm.setValueForKey("Marimba", "soundName");
+              event.title = "Ain Od Melvado: " + self.message;
+              event.addAlarm(alarm);
+              event.addRecurrenceRule(recurrenceRule);
+              event.startDate = new Date();
+              event
+              try {
+                eventStore.saveEventSpanError(event, EKSpan.ThisEvent);
+              } catch (e) {
+                alert(`Error saving event: ${e.message}`);
+              }
+            } else {
+              alert(
+                "Access to calendar was rejected. To set alarms you must go to settings to allow reminders"
+              )
+            }
+          }
+        )
+        return
+      }
+
       const Calendar = android.icu.util.Calendar;
       const Intent = android.content.Intent;
       const AlarmClock = android.provider.AlarmClock;
