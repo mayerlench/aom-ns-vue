@@ -37,12 +37,12 @@
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-          <Label text="This option is comming soon" class="tab text-center"></Label>
+          <Label text="This option is coming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-          <Label text="This option is comming soon" class="tab text-center"></Label>
+          <Label text="This option is coming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
     </Tabs>
@@ -108,10 +108,8 @@ export default {
   },
   methods: {
     chapterTap: function(c) {
-      this.$navigateTo(TehilimText, { props: { chapters: [c] } });
+      this.$navigateTo(TehilimText, { props: { chapters: [c.item] } });
     },
-    getFirstWord: text => text.split(" ")[0],
-
     onDrawerButtonTap() {
       utils.showDrawer();
     }
