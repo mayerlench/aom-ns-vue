@@ -20,10 +20,10 @@
       <Label class="action-bar-title" text="Asher Yatzar"></Label>
     </ActionBar>
     <ScrollView>
-      <FlexboxLayout flexWrap="wrap" alignContent="flex-start" class="container">
+      <StackLayout class="container">
         <Label
           textWrap="true"
-          class="formattedText"
+          class="formattedTextHebrew"
           v-for="(text, i) in text.hebrew"
           v-bind:key="i"
         >
@@ -43,7 +43,7 @@
             <Span :text="text.substring(getFirstWord(text).length) + '\n\n'" class="t-20" />
           </FormattedString>
         </Label>
-      </FlexboxLayout>
+      </StackLayout>
     </ScrollView>
   </Page>
 </template>
@@ -80,14 +80,20 @@ export default {
   background-color: #d5d5d5;
   padding: 15;
 }
-.content {
-  padding: 15;
-}
+
 .itemHeaderText {
   font-family: Roboto;
   height: auto;
   color: #333;
   font-size: 23;
   font-weight: 300;
+}
+.formattedTextHebrew{
+  color: black;
+  text-align: right;
+}
+.formattedTextEnglish{
+  color: black;
+  text-align: left;
 }
 </style>

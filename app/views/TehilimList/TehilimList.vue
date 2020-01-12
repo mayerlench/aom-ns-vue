@@ -1,16 +1,7 @@
 <template>
   <Page class="page">
     <ActionBar class="action-bar">
-      <!-- 
-            Use the NavigationButton as a side-drawer button in Android
-            because ActionItems are shown on the right side of the ActionBar
-      -->
       <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
-      <!-- 
-            Use the ActionItem for IOS with position set to left. Using the
-            NavigationButton as a side-drawer button in iOS is not possible,
-            because its function is to always navigate back in the application.
-      -->
       <ActionItem
         icon="res://menu"
         android:visibility="collapsed"
@@ -46,12 +37,12 @@
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-         
+          <Label text="This option is comming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-          <Label text="Search Page" class="tab text-center"></Label>
+          <Label text="This option is comming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
     </Tabs>
@@ -64,29 +55,11 @@ import SelectedPageService from "@/shared/selected-page-service";
 import prayerText from "@/assets/prayers/asherYatzar.json";
 import { range, splitEvery } from "ramda";
 import gematriya from "gematriya";
+import TehilimText from "../TehilimText";
 
 export default {
   data() {
     return {
-      items: [
-        {
-          title: "1",
-          footer: "10",
-          headerText: "First",
-          footerText: "4",
-          blah: [
-            {
-              image: "~/images/a9ff17db85f8136619feb0d5a200c0e4.png",
-              text: "Stop"
-            },
-            {
-              text: "Drop",
-              image:
-                "http://static.srcdn.com/wp-content/uploads/Superman-fighting-Goku.jpg"
-            }
-          ]
-        }
-      ],
       gematriya,
       chapters: range(1, 151),
       books: [
@@ -135,7 +108,7 @@ export default {
   },
   methods: {
     chapterTap: function(c) {
-      alert("tapped " + c.item);
+      this.$navigateTo(TehilimText, { props: { chapters: [c] } });
     },
     getFirstWord: text => text.split(" ")[0],
 
@@ -171,7 +144,6 @@ export default {
   font-size: 16px;
 }
 .container {
-  background-color: #d5d5d5;
   padding: 15;
 }
 .content {

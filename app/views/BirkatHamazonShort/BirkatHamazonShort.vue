@@ -11,7 +11,7 @@
       <Label class="action-bar-title" text="Birkat Hamazon (Short)"></Label>
     </ActionBar>
     <ScrollView>
-      <FlexboxLayout flexWrap="wrap" alignContent="flex-start" class="container">
+      <StackLayout class="container">
         <Label
           textWrap="true"
           class="formattedText"
@@ -20,10 +20,10 @@
         >
           <FormattedString>
             <Span :text="getFirstWord(text)" class="fas t-20" />
-            <Span :text="text.substring(getFirstWord(text).length) + '\n\n'" class="t-20" />
+            <Span :text="text.substring(getFirstWord(text).length) + '\n'" class="t-20" />
           </FormattedString>
         </Label>
-      </FlexboxLayout>
+      </StackLayout>
     </ScrollView>
   </Page>
 </template>
@@ -60,14 +60,15 @@ export default {
   background-color: #d5d5d5;
   padding: 15;
 }
-.content {
-  padding: 15;
-}
 .itemHeaderText {
   font-family: Roboto;
   height: auto;
   color: #333;
   font-size: 23;
   font-weight: 300;
+}
+.formattedText {
+  color: black;
+  text-align: right;
 }
 </style>
