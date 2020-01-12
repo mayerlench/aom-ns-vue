@@ -26,7 +26,7 @@
 
       <!-- The number of TabContentItem components should corespond to the number of TabStripItem components -->
       <TabContentItem>
-        <ListView for="c in chapters" @itemTap="chapterTap" style="height:1250px">
+        <ListView for="c in chapters" @itemTap="chapterTap" style="height:100%s">
           <v-template>
             <FlexboxLayout flexDirection="row">
               <Label :text="`Chapter ${c}`" class="t-15" />
@@ -37,12 +37,12 @@
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-          <Label text="This option is comming soon" class="tab text-center"></Label>
+          <Label text="This option is coming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
-          <Label text="This option is comming soon" class="tab text-center"></Label>
+          <Label text="This option is coming soon" class="tab text-center"></Label>
         </GridLayout>
       </TabContentItem>
     </Tabs>
@@ -108,10 +108,8 @@ export default {
   },
   methods: {
     chapterTap: function(c) {
-      this.$navigateTo(TehilimText, { props: { chapters: [c] } });
+      this.$navigateTo(TehilimText, { props: { chapters: [c.item] } });
     },
-    getFirstWord: text => text.split(" ")[0],
-
     onDrawerButtonTap() {
       utils.showDrawer();
     }

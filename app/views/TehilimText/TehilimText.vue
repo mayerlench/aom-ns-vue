@@ -17,22 +17,22 @@ import * as utils from "@/shared/utils";
 import { nth } from "ramda";
 import SelectedPageService from "@/shared/selected-page-service";
 import psalms from "@/assets/prayers/psalms.json";
+import gematriya from "gematriya";
 
 export default {
   props: ["chapters", "day", "book"],
   data() {
     return {
-      actionTitle: this.day + this.book || "Chapter " + this.chapters[0],
-      text: psalms.chapters.he[0].join(" ")
+      actionTitle:
+        this.day + this.book ||
+        `Chapter  ${this.chapters[0]} - ${gematriya(this.chapters[0], {
+          punctuate: false
+        })}`,
+      text: psalms.chapters.he[this.chapters[0] - 1].join(" ")
     };
   },
   mounted() {
     SelectedPageService.getInstance().updateSelectedPage("TehilimText");
-  },
-  methods: {
-    onDrawerButtonTap() {
-      utils.showDrawer();
-    }
   }
 };
 </script>
