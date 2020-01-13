@@ -56,7 +56,7 @@ export default {
       BirkatHamazon,
       BirkatHamazonShort,
       TehilimList,
-      selectedPage: "SetAlarm"
+      selectedPage: ""
     };
   },
   components: {

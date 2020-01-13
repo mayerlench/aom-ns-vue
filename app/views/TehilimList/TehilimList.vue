@@ -26,7 +26,7 @@
 
       <!-- The number of TabContentItem components should corespond to the number of TabStripItem components -->
       <TabContentItem>
-        <ListView for="c in chapters" @itemTap="chapterTap" style="height:100%s">
+        <ListView for="c in chapters" @itemTap="chapterTap" style="height:100%">
           <v-template>
             <FlexboxLayout flexDirection="row">
               <Label :text="`Chapter ${c}`" class="t-15" />
