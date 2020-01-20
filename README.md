@@ -38,7 +38,7 @@ Replacing the alias_name with a name of your choosing run the following command
 Creating an android app bundle builds a bundle of different apks that will work on a variety of devices
 `tns build android --release --key-store-path "pathToYourKeystore" --key-store-password <YourKeystorePassword> --key-store-alias <KeystoreAlias> --key-store-alias-password <YourKeystoreAliasPassword> --aab --copy-to aab.aab`
 
-##### Run Android App Bundle on Device
+##### Run Android App Bundle on Device (Testing purposes)
 `tns run android --key-store-path "pathToYourKeystore" --key-store-password <YourKeystorePassword> --key-store-alias <KeystoreAlias> --key-store-alias-password <YourKeystoreAliasPassword> --aab`
 
 ##### Generate Google App Signing Key
