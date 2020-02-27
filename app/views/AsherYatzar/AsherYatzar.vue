@@ -90,7 +90,7 @@ export default {
 }
 .formattedTextHebrew{
   color: black;
-  text-align: right;
+  text-align: left;
 }
 .formattedTextEnglish{
   color: black;

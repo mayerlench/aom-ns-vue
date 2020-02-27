@@ -50,6 +50,6 @@ export default {
   color: rgb(0, 0, 0);
   font-size: 27;
   font-weight: 400;
-  text-align: right;
+  text-align: left;
 }
 </style>

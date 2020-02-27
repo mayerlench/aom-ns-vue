@@ -36,9 +36,14 @@
         </ListView>
       </TabContentItem>
       <TabContentItem>
-        <GridLayout>
-          <Label text="This option is coming soon" class="tab text-center"></Label>
-        </GridLayout>
+          <ListView for="(c, index) in books" @itemTap="selectBook" style="height:100%">
+            <v-template>
+              <FlexboxLayout flexDirection="row">
+                <Label :text="`Book ${c.book}`" class="t-15" />
+                <Label :text="`Chapter ${c.selected}`" class="t-15" />
+              </FlexboxLayout>
+            </v-template>
+          </ListView>
       </TabContentItem>
       <TabContentItem>
         <GridLayout>
@@ -53,21 +58,23 @@
 import * as utils from "@/shared/utils";
 import SelectedPageService from "@/shared/selected-page-service";
 import prayerText from "@/assets/prayers/asherYatzar.json";
-import { range, splitEvery } from "ramda";
+import { range, splitEvery, findIndex, propEq } from "ramda";
 import gematriya from "gematriya";
 import TehilimText from "../TehilimText";
+import ModalComponent from "./BookModal.vue";
 
+const INITAL_SELECTED_BOOK = { book: null, chapters: [] };
 export default {
   data() {
     return {
       gematriya,
       chapters: range(1, 151),
       books: [
-        range(1, 42),
-        range(42, 73),
-        range(73, 90),
-        range(90, 107),
-        range(107, 151)
+        { book: 1, chapters: range(1, 42) },
+        { book: 2, chapters: range(42, 73) },
+        { book: 3, chapters: range(73, 90) },
+        { book: 4, chapters: range(90, 107) },
+        { book: 5, chapters: range(107, 151) }
       ],
       thirtyDayCycle: [
         range(1, 10),
@@ -107,6 +114,19 @@ export default {
     SelectedPageService.getInstance().updateSelectedPage("TehilimList");
   },
   methods: {
+    selectBook(book) {
+      // if (this.selectedBook.book === book.item.book)
+      //   return (this.selectedBook = INITAL_SELECTED_BOOK);
+      const selectedBook = book.item.book;
+      const alreadySelected = book.item.selected;
+      this.books = this.books.map(b => ({
+        ...b,
+        selected: alreadySelected ? false : b.book === selectedBook
+      }));
+    },
+    onSelectBook: function(c) {
+      this.selectedBook = c.item;
+    },
     chapterTap: function(c) {
       this.$navigateTo(TehilimText, { props: { chapters: [c.item] } });
     },

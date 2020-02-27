@@ -69,6 +69,6 @@ export default {
 }
 .formattedText {
   color: black;
-  text-align: right;
+  text-align: left;
 }
 </style>
