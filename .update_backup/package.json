@@ -8,10 +8,10 @@
     "id": "org.mlench.aom",
     "templateVersion": "v2",
     "tns-android": {
-      "version": "6.5.0"
+      "version": "6.3.1"
     },
     "tns-ios": {
-      "version": "6.5.0"
+      "version": "6.3.0"
     }
   },
   "dependencies": {
@@ -27,16 +27,16 @@
     "nativescript-vue": "^2.4.0",
     "nativescript-vue-devtools": "^1.2.0",
     "ramda": "^0.26.1",
-    "tns-core-modules": "^6.5.1",
+    "tns-core-modules": "^6.3.2",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@types/ramda": "^0.26.39",
     "@babel/preset-env": "^7.8.2",
     "@types/node": "^13.1.6",
-    "@types/ramda": "^0.26.39",
     "babel-loader": "^8.0.6",
-    "nativescript-dev-webpack": "^1.5.1",
+    "nativescript-dev-webpack": "^1.4.1",
     "nativescript-vue-template-compiler": "^2.4.0",
     "nativescript-worker-loader": "^0.10.0",
     "node-sass": "^4.13.0",
